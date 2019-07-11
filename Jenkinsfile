@@ -1,14 +1,21 @@
-node('master'){
-
-    stage('git checkout'){
-    try {    
-        checkout([$class: 'GitSCM', branches: [[name: 'master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[ url: 'git@github.com:bhargavb7/simple-java-maven-app.git']]])
-    } catch (e) {
-            currentBuild.result = "FAILED"
-            emailNotify(currentBuild.result, env.BUILD_USER)
-            throw e
-            }
+pipeline {
+    agent any
+    environment {
+        //be sure to replace "willbla" with your own Docker Hub username
+        DOCKER_IMAGE_NAME = "willbla/train-schedule"
     }
-
+    stages {
+        stage('DeployApp') {
+            when {
+                branch 'master'
+            }
+            steps {
+                kubernetesDeploy(
+                    kubeconfigId: 'bb20015a-575d-475f-b78e-65ecd648c9fc',
+                    configs: 'deployment.yml',
+                    enableConfigSubstitution: true
+                )
+            }
+        }
+    }
 }
-

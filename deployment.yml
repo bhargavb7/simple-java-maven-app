@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: weatherapi
+  namespace: weatherapp
+spec:
+  replicas: 2
+  selector:
+    app: weather-app
+  template:
+    metadata:
+      name: weatherapi
+      namespace: dataflow-poc
+      labels:
+        app: weather-app
+    spec:
+      containers:
+      - name: weatherapi
+        image: bhargavb7/weatherapi
+        ports:
+        - containerPort: 8085
+          hostPort: 8085
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: weather-app
+  name: weatherapi
+  namespace: weatherapp  
+spec:
+  ports:
+  - port: 8085
+  selector:
+    app: weather-app
