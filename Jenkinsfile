@@ -6,9 +6,6 @@ pipeline {
     }
     stages {
         stage('DeployApp') {
-            when {
-                branch 'master'
-            }
             steps {
                 kubernetesDeploy(
                     kubeconfigId: 'bb20015a-575d-475f-b78e-65ecd648c9fc',
