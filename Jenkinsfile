@@ -1,4 +1,4 @@
-node('Dev1'){
+node('master'){
 
     stage('git checkout'){
     try {    
