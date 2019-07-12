@@ -2,9 +2,9 @@
 import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException
 import hudson.AbortException
 
-library identifier: 'maven-project@master', retriever: modernSCM(
+library identifier: 'library-repo@master', retriever: modernSCM(
   [$class: 'GitSCMSource',
-   remote: 'git@github.com:bhargavb7/maven-project.git'])
+   remote: 'git@github.com:bhargavb7/library-repo.git'])
 
 podTemplate(label: 'master', containers: [
     containerTemplate(image: 'alpine/git', name: 'git', command: 'cat', ttyEnabled: true),
