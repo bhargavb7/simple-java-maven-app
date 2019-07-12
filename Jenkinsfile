@@ -2,7 +2,7 @@
 import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException
 import hudson.AbortException
 
-library identifier: 'jenkins-pipeline-library@gitlab', retriever: modernSCM(
+library identifier: 'maven-project@master', retriever: modernSCM(
   [$class: 'GitSCMSource',
    remote: 'git@github.com:bhargavb7/maven-project.git'])
 
